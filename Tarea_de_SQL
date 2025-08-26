@@ -1,0 +1,67 @@
+Select * from Customers;
+
+--Uso de Wildcards
+Select * From Customers
+Where ContactName LIKE 'An%'
+
+Select * From Customers
+Where CustomerID LIKE 'An%'
+
+Select * From Customers
+Where CustomerID LIKE '%N'
+
+Select * From Customers
+Where CustomerID LIKE 'AN___'
+
+Select * From Customers
+Where CustomerID LIKE '__o__'
+
+Select * From Customers
+Where CustomerID LIKE '[ABC]%'
+
+Select * From Customers
+Where CustomerID LIKE '[WJY]%'
+
+Select * From Customers
+Where CustomerID LIKE '[A-C]%'
+
+Select * From Customers
+Where CustomerID LIKE '[a-e]%'
+
+
+--1
+Select * From Customers
+Where Address LIKE 'Av.%'
+
+--2
+Select * From Customers
+Where Country like '[Brasil]%'
+
+--3
+Select * From Customers
+Where Region like '[^NULL]%' AND Fax Like '[^NULL]%' 
+
+--Uso del IN
+Select * from Employees
+Where TitleOfCourtesy In ('Ms', 'Mr', 'Mrs')
+
+--Uso del group by
+Select City, count(*) 'cantidad' from Customers
+Group by City
+Order by count(*) desc
+
+--4
+Select ShipCountry, count(*) 'cantidad' from Orders
+Group by ShipCountry
+
+--5
+Select ShipCity, count(*) 'cantidad' from Orders
+Group by ShipCity
+
+--6
+Select CategoryID, sum(UnitPrice) as TotalUnitprice from Products
+Group by CategoryID
+
+Select count(*) from Customers; 
+Select sum(UnitPrice) from Products;
+Select avg(UnitPrice) from Products;
