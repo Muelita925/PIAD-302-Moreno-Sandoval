@@ -39,5 +39,5 @@ GROUP BY c.CompanyName;
 
 --2
 Select e.FirstName, COUNT (o.OrderID) from Orders o
-JOIN Employees e ON e.EmployeeID = e.EmployeeID
+JOIN Employees e ON o.EmployeeID = e.EmployeeID
 GROUP BY e.FirstName;
