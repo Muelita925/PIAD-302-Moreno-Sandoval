@@ -1,0 +1,43 @@
+--unir todas las filas, id y nombre de las tablas productos y categorias.
+Select ProductID, ProductNAME From Products
+UNION 
+Select CategoryID, CategoryName From Categories
+
+--Consulta - uso inner join
+Select * from Products p
+INNER JOIN Categories c ON p.CategoryID = c.CategoryID
+
+--Monstrar el ProdcutId, productname, unitprice, categoryname
+Select p.ProductID, p.ProductName, p.UnitPrice, c.CategoryNAME from Products p
+INNER JOIN Categories c ON p.CategoryID = c.CategoryID
+
+--ORDERS Y CUSTOMER --> INNER (3 COLUMNAS DE CADA TABLAS)
+Select o.OrderID, o.OrderDate, o.ShipCity, c.CustomerID, c.CompanyName, c.ContactName from Orders o
+INNER JOIN Customers c ON o.CustomerID = c.CustomerID
+
+--ORDERS Y ORDERS DETAILS --> INNER (5 COLUMNAS DE CADA TABLAS)
+Select o.OrderID, o.OrderDate, o.CustomerID, o.ShipCity, o.Freight, od.ProductID, od.Discount, od.OrderID from Orders o
+INNER JOIN [Order Details] od On o.OrderID = od.OrderID;
+
+
+--1.Mostrar el total de los "Orders" y agruparlos por Company Name 
+--Nota: Para calcular el total, lo obtienes de la tabla Order details (UnitPrice * Quantity)
+--Ejemplo:
+--Alfreds Futterkiste       -600
+--Ana Trujillo Emparedades y helados  -956
+--2.Mostrar la cantidad de "Orders" agrupados por el nombre del empleado
+--Ejemplo:
+--Nancy 20
+--Janet 88
+
+
+--1
+Select c.CompanyName, SUM(od.UnitPrice * od.Quantity) from Orders o
+JOIN [Order Details] od ON o.OrderID = od.OrderID
+JOIN Customers c ON o.CustomerID = c.CustomerID
+GROUP BY c.CompanyName;
+
+--2
+Select e.FirstName, COUNT (o.OrderID) from Orders o
+JOIN Employees e ON e.EmployeeID = e.EmployeeID
+GROUP BY e.FirstName;
