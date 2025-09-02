@@ -1,0 +1,70 @@
+--Sumar
+CREATE PROC sumar_numeros
+(
+   @num1 INT,
+   @num2 INT
+)
+AS
+BEGIN
+   PRINT CAST(@num1 + @num2 AS VARCHAR);
+END;
+GO
+
+--Restar
+CREATE PROC restar_numeros
+(
+   @num1 INT,
+   @num2 INT
+)
+AS
+BEGIN
+   PRINT CAST(@num1 - @num2 AS VARCHAR);
+END;
+GO
+
+--Multiplicar
+CREATE PROC multiplicar_numeros
+(
+   @num1 INT,
+   @num2 INT
+)
+AS
+BEGIN
+   PRINT CAST(@num1 * @num2 AS VARCHAR);
+END;
+GO
+
+--Dividir
+CREATE PROC dividir_numeros
+(
+   @num1 INT,
+   @num2 INT
+)
+AS
+BEGIN
+   IF @num2 = 0
+      PRINT 'No se puede dividir por cero';
+   ELSE
+      PRINT CAST(CAST(@num1 AS FLOAT) / @num2 AS VARCHAR);
+END;
+GO
+
+--Potenciar
+CREATE PROC potenciar_numeros
+(
+   @base INT,
+   @exp INT
+)
+AS
+BEGIN
+   PRINT CAST(POWER(CAST(@base AS FLOAT), @exp) AS VARCHAR);
+END;
+GO
+
+
+EXEC sumar_numeros 10, 5;
+EXEC restar_numeros 10, 5;
+EXEC multiplicar_numeros 10, 5;
+EXEC dividir_numeros 10, 5;
+EXEC dividir_numeros 10, 0;
+EXEC potenciar_numeros 2, 3;
