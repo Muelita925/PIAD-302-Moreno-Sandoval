@@ -1,0 +1,112 @@
+ejercicio3
+package javaapplication7;
+
+import java.util.Scanner;
+
+public class ejercicio3 {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        // Imprimir los números pares del 1 al 100
+        System.out.println("Números pares del 1 al 100:");
+        for (int i = 1; i <= 100; i++) {
+            if (i % 2 == 0) {
+                System.out.print(i + " ");
+            }
+        }
+        System.out.println("\n");
+
+        // Imprimir los números múltiplos de 5 del 1 al 100
+        System.out.println("Números múltiplos de 5 del 1 al 100:");
+        for (int i = 1; i <= 100; i++) {
+            if (i % 5 == 0) {
+                System.out.print(i + " ");
+            }
+        }
+        System.out.println("\n");
+
+        System.out.print("Ingrese un número: ");
+        int numero = scanner.nextInt();
+
+        System.out.println("Números menores o iguales a " + numero + ":");
+        for (int i = 1; i <= numero; i++) {
+            System.out.print(i + " ");
+        }
+        System.out.println("\n");
+
+        // Ingresar el número inicial y final de la tabla de multiplicar
+        System.out.print("Ingrese el número inicial de la tabla: ");
+        int inicio = scanner.nextInt();
+
+        System.out.print("Ingrese el número final de la tabla: ");
+        int fin = scanner.nextInt();
+
+        if (inicio > fin) {
+            System.out.println("El número inicial debe ser menor o igual al número final.");
+        } else {
+            for (int num = inicio; num <= fin; num++) {
+                System.out.println("Tabla del " + num + ":");
+                for (int i = 1; i <= 12; i++) {
+                    System.out.println(num + " x " + i + " = " + (num * i));
+                }
+                System.out.println();
+            }
+        }
+
+        scanner.close();
+    }
+}
+
+ejercicio2
+package javaapplication7;
+
+import javax.swing.JOptionPane;
+
+public class ejercicio2 {
+    public static void main(String[] args) {
+        System.out.println("Hello world");
+        String nombre;
+       
+        nombre = JOptionPane.showInputDialog(null, "Ingrese un nombre: ");
+       
+        System.out.print("Bienvenido: "+ nombre);
+       
+        //Sumar 2 numeros y mostrar la suma.
+        String num1Str = JOptionPane.showInputDialog(null, "Ingrese el primer número entero:");
+        String num2Str = JOptionPane.showInputDialog(null, "Ingrese el segundo número entero:");
+       
+        int num1 = Integer.parseInt(num1Str);
+        int num2 = Integer.parseInt(num2Str);
+       
+        int suma = num1 + num2;
+       
+        JOptionPane.showMessageDialog(null, "La suma es: " + suma);
+       
+    }    
+}
+
+ejercicio1
+package javaapplication7;
+
+import java.util.Scanner;
+
+public class Ejercicio1 {
+    public static void main(String[] args) {
+        int nota1 = 30;
+        int nota2 = 13;
+        double promedio = (nota1 + nota2) / 2;
+        System.out.println("El promedio es: " + promedio);
+        System.out.println("Hola Mundo");
+   
+        Scanner entrada = new Scanner(System.in);
+       
+        System.out.println("Ingrese un nombre: ");
+        String nombre = entrada.nextLine();
+       
+        System.out.println("Ingrese un apellido: ");
+        String apellidos = entrada.nextLine();
+       
+        System.out.println("El alumno ingredo es: " + nombre + " " + apellidos);
+       
+    }
+}
