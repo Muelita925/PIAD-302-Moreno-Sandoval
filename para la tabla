@@ -1,0 +1,44 @@
+package crudsenati;
+
+import java.util.*;
+import java.sql.*;
+public class CrudSenati {
+
+    public static void main(String[] args) {
+     Connection cn = null;
+         try {
+         String jdbc_url = "jdbc:sqlserver://localhost:1433;encrypt=false;databaseName=Northwind";        
+         cn = DriverManager.getConnection(jdbc_url,"sa","1234");
+         
+         if(cn != null) {
+             System.out.println("conexion Exitosa");
+         }
+                 
+        } catch (SQLException ex) {
+           
+        }
+        //consultas
+       try {  
+        String sql = "SELECT * FROM Products";
+        ResultSet result = null;
+        Statement stmt = cn.createStatement();
+        result = stmt.executeQuery(sql);
+       
+        while (result.next()){
+            System.out.println (
+                    result.getInt("ProductID")+ "-" +
+                    result.getString("ProductName") + "-" +
+                    result.getInt("SupplierID") + "-" +
+                    result.getInt("CategoryID") + "-" +
+                    result.getDouble("UnitPrice")
+            );
+        }
+      } catch (SQLException e){
+      }  
+     
+   
+   
+   
+    }
+   
+}
