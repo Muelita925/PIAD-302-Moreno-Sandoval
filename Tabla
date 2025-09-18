@@ -1,0 +1,73 @@
+package crudsenati;
+
+import java.sql.*; // Esto importa java.sql.Connection
+import javax.swing.*;
+import javax.swing.table.DefaultTableModel;
+
+public class proyectotabla {
+
+    public static void main(String[] args) {
+        // Crear ventana
+        JFrame frame = new JFrame("Northwind");
+        frame.setSize(400, 300);
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
+        // Modelo de tabla para mostrar datos
+        DefaultTableModel modelo = new DefaultTableModel();
+        modelo.addColumn("RegionID");
+        modelo.addColumn("RegionDescription");
+
+        // Crear tabla con el modelo
+        JTable tabla = new JTable(modelo);
+
+        // Llenar el modelo con datos de la base
+        try {
+            java.sql.Connection cn = conectar(); // Especificar java.sql.
+            if (cn != null) {
+                Statement stmt = cn.createStatement();
+                ResultSet rs = stmt.executeQuery("SELECT RegionID, RegionDescription FROM Region");
+
+                while (rs.next()) {
+                    int id = rs.getInt("RegionID");
+                    String descripcion = rs.getString("RegionDescription");
+                    modelo.addRow(new Object[]{id, descripcion});
+                }
+
+                rs.close();
+                stmt.close();
+                cn.close();
+            }
+        } catch (SQLException e) {
+            System.out.println("Error: " + e.getMessage());
+        }
+
+        // Agregar tabla a un scroll para que se pueda desplazar
+        JScrollPane scroll = new JScrollPane(tabla);
+
+        // Agregar scroll (tabla) a la ventana
+        frame.add(scroll);
+
+        // Mostrar ventana
+        frame.setLocationRelativeTo(null);
+        frame.setVisible(true);
+    }
+
+    // Método para conectar a la base de datos
+    public static java.sql.Connection conectar() {
+        java.sql.Connection cn = null;
+        try {
+            String url = "jdbc:sqlserver://localhost\\SQLEXPRESS:1433;databaseName=Northwind;encrypt=false";
+            String user = "sa";
+            String password = "1234";
+            
+            Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+            cn = DriverManager.getConnection(url, user, password);
+            System.out.println("Conexión exitosa");
+            
+        } catch (Exception e) {
+            System.out.println("Error: " + e.getMessage());
+            e.printStackTrace();
+        }
+        return cn;
+    }
+}
