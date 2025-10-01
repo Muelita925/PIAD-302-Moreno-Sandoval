@@ -1,0 +1,106 @@
+package com.senati.Crud.Senati;
+
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+
+@SpringBootApplication
+public class CrudSenatiApplication {
+
+    public static void main(String[] args) {
+       SpringApplication.run(CrudSenatiApplication.class, args);
+    }
+
+}
+
+
+
+spring.application.name=Crud-Senate
+spring.application.url = jdbc://sqlserver://localhost:1433;databaseName=Northwind;encrypt=false
+spring.datasource.username = sa
+spring.datasource.password = 1234
+spring.datasource.driver-class-name = com.microsoft.sqlserver.jdbc.SQLServerDriver
+spring.jpa.hibernate.ddl-auto = none
+spring.jpa.hibernate.naming.physical-strategy=org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+
+
+
+package com.senati.Crud.Senati.model;
+import jakarta.persistence.*;
+import jakarta.persistence.Id;
+
+@Entity
+public class Region {
+    @Id
+    private int RegionID;
+    private String RegionDescription;
+
+    public String getRegionDescription() {
+        return RegionDescription;
+    }
+
+    public void setRegionDescription(String regionDescription) {
+        RegionDescription = regionDescription;
+    }
+
+    public int getRegionID() {
+        return RegionID;
+    }
+
+    public void setRegionID(int regionID) {
+        RegionID = regionID;
+    }
+}
+
+
+
+package com.senati.Crud.Senati.repository;
+import com.senati.Crud.Senati.model.Region;
+import org.springframework.data.jpa.repository.JpaRepository;
+
+public interface RegionRepository extends JpaRepository<Region, Integer> {
+}
+
+
+package com.senati.Crud.Senati.service;
+
+import com.senati.Crud.Senati.model.Region;
+import com.senati.Crud.Senati.repository.RegionRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import java.util.List;
+
+@Service
+public class service {
+    @Autowired
+    RegionRepository regionRepository;
+
+    public List<Region> getAllRegion(){
+        return regionRepository.findAll();
+    }
+}
+
+
+
+package com.senati.Crud.Senati.controller;
+
+import com.senati.Crud.Senati.model.Region;
+import com.senati.Crud.Senati.service.service;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import java.util.List;
+
+@RestController
+public class RegionControl {
+    @Autowired
+    service regionService;
+
+    @GetMapping("/regions")
+    public List<Region> getAllRegions(){
+        return regionService.getAllRegion();
+    }
+}
+
+
